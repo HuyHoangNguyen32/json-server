@@ -29,7 +29,6 @@ server.use((req, res, next) => {
   next();
 });
 
-
 // Custom output for LIST with pagination
 router.render = (req, res) => {
   // Check GET with pagination
@@ -39,7 +38,7 @@ router.render = (req, res) => {
 
   const totalCountHeader = headers['x-total-count'];
   if (req.method === 'GET' && totalCountHeader) {
-    const queryParams = queryString.parse(req._parsedUrl.query)
+    const queryParams = queryString.parse(req._parsedUrl.query);
     console.log(queryParams);
 
     const result = {
@@ -47,16 +46,20 @@ router.render = (req, res) => {
       pagination: {
         _page: Number.parseInt(queryParams._page) || 1,
         _limit: Number.parseInt(queryParams._limit) || 10,
-        _totalRows: Number.parseInt(totalCountHeader)
+        _totalRows: Number.parseInt(totalCountHeader),
       },
-    }
+    };
     return res.jsonp(result);
   }
-  res.jsonp(res.locals.data)
-}
+  res.jsonp(res.locals.data);
+};
 
 // Use default router
+
 server.use('/api', router);
-server.listen(3000, () => {
+
+// Start the server
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
   console.log('JSON Server is running');
 });
