@@ -1,12 +1,12 @@
-const faker = require("faker");
-const fs = require("fs");
+// const faker = require("faker");
+// const fs = require("fs");
+import faker from 'faker';
+import fs from 'fs';
 
 // Set locale to use Vietnamese
-faker.locale = "vi";
-
+faker.locale = 'vi';
 
 const randomCategoryList = (n) => {
-
   const categoryList = [];
 
   // loop and push category
@@ -19,11 +19,10 @@ const randomCategoryList = (n) => {
     };
 
     categoryList.push(category);
-  })
+  });
 
   return categoryList;
-}
-
+};
 
 const randomProductList = (categoryList, numberOfProducts) => {
   if (numberOfProducts <= 0) return [];
@@ -32,7 +31,7 @@ const randomProductList = (categoryList, numberOfProducts) => {
 
   //random data
   for (const category of categoryList) {
-    Array.from(new Array(numberOfProducts)).forEach(()=>{
+    Array.from(new Array(numberOfProducts)).forEach(() => {
       const product = {
         categoryId: category.id,
         id: faker.datatype.uuid(),
@@ -42,31 +41,31 @@ const randomProductList = (categoryList, numberOfProducts) => {
         description: faker.commerce.productDescription(),
         createAt: Date.now(),
         updateAt: Date.now(),
-        thumbnailUrl: faker.image.imageUrl(400,400),
-      }
+        thumbnailUrl: faker.image.imageUrl(400, 400),
+      };
 
       productList.push(product);
-    })
+    });
   }
   return productList;
-}
+};
 
 (() => {
   //random date
-  const categoryList = randomCategoryList(4);
-  const productList = randomProductList(categoryList, 5);
+  const categoryList = randomCategoryList(6);
+  const productList = randomProductList(categoryList, 10);
 
   // prepare db object
   const db = {
     categories: categoryList,
     products: productList,
     profile: {
-      name: "Pro",
+      name: 'Pro',
     },
   };
 
   // write db object to db.json
-  fs.writeFile('db.json',JSON.stringify(db), () => {
-    console.log('Generated data successfully')
-  })
+  fs.writeFile('db.json', JSON.stringify(db), () => {
+    console.log('Generated data successfully');
+  });
 })();

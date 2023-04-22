@@ -6,6 +6,9 @@
 # @name getAllProducts
 GET {{baseUrl}}/{{resourceName}}
 
+###
+# @name getOneProduct
+GET {{baseUrl}}/{{resourceName}}/5vZpXep
 
 ###
 # @name filterProducts
@@ -29,17 +32,24 @@ POST {{baseUrl}}/{{resourceName}}
 Content-Type: application/json
 
 {
-  "name": "SQL"
-}
+    "categoryId": "cc4e9288-870a-40bd-91ba-bb743eb39728",
+    "name": "Avatar",
+    "color": "bblue",
+    "price": 999,
+    "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+    "thumbnailUrl": "http://placeimg.com/400/400"
+  }
 
 ### 
 # @name updateProduct
-PATCH  {{baseUrl}}/{{resourceName}}/3
+PATCH  {{baseUrl}}/{{resourceName}}/5vZpXep
 Content-Type: application/json
 
 {
-  "name": "React"
-}
+    "name": "Avatar 2",
+    "color": "blue",
+    "price": 1000
+  }
 
 ### 
 # @name removeProduct
